@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-main',
@@ -39,8 +40,8 @@ export class MainComponent {
   hideResult = true;
 
   matchPercentage() {
-    let str1 = this.input1;
-    let str2 = this.input2;
+    let str1 = _.replace(this.input1, /\s+/g, '');
+    let str2 = _.replace(this.input2, /\s+/g, '');
 
     if (this.inputType === 'ci') {
       str1 = str1.toUpperCase();
