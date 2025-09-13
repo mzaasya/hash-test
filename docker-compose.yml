@@ -1,18 +1,16 @@
-name: armas-erp
+name: hash-test
 services:
-  armas-erp:
-    image: ghcr.io/armasid/als
-    container_name: armas-erp
+  hash-test:
+    image: ghcr.io/mzaasya/hash-test
+    container_name: hash-test
     restart: on-failure
-    ports:
-      - 3024:80
     labels:
       - traefik.enable=true
-      - traefik.http.routers.armas-erp.rule=Host(`erp.armas.id`) || Host(`dss.armas.id`)
-      # - traefik.http.routers.armas-erp.entrypoints=websecure
-      # - traefik.http.routers.armas-erp.tls=true
-      # - traefik.http.routers.armas-erp.tls.certresolver=leresolver
-      - traefik.http.services.armas-erp.loadbalancer.server.port=80
+      - traefik.http.routers.hash-test.rule=Host(`hash-test.site`)
+      - traefik.http.routers.hash-test.entrypoints=websecure
+      - traefik.http.routers.hash-test.tls=true
+      - traefik.http.routers.hash-test.tls.certresolver=leresolver
+      - traefik.http.services.hash-test.loadbalancer.server.port=80
 networks:
   default:
     name: jiwalu
