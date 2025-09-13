@@ -4,6 +4,8 @@ services:
     image: ghcr.io/mzaasya/hash-test
     container_name: hash-test
     restart: on-failure
+    ports:
+      - 3044:80
     labels:
       - traefik.enable=true
       - traefik.http.routers.hash-test.rule=Host(`hash-test.site`)
