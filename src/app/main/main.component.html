@@ -19,7 +19,7 @@
 <div class="custom-container">
     <p-card class="custom-card my-5">
         <div class="custom-content">
-            <h2 class="title">Matching Letter Percentage</h2>
+            <h2 class="title">Matching Letter</h2>
             <p class="subtitle">Please input the word to compare it</p>
 
             <form (ngSubmit)="matchPercentage()" #matchingForm="ngForm" class="p-fluid">
@@ -91,6 +91,7 @@
                         class="rounded w-full"
                         size="small"
                         severity="danger"
+                        [disabled]="hideResult"
                         (click)="reset()"
                         > </button>
                     </div>
