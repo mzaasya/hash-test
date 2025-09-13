@@ -1,0 +1,31 @@
+.custom-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background: linear-gradient(135deg, #e0f2ff, #f3f6ff);
+  padding: 0;
+  margin: 0;
+}
+
+.custom-card {
+  width: 520px;
+  border-radius: 1rem !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  overflow: hidden;
+
+  :host ::ng-deep .p-card-body {
+    padding: 0 !important;
+  }
+
+  :host ::ng-deep .p-card-content {
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-card {
+    width: 90%;
+  }
+}

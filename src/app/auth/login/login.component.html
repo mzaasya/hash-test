@@ -1,0 +1,58 @@
+<div class="custom-container">
+  <p-card class="custom-card">
+    <div class="custom-content">
+      <h2 class="title">Welcome Back 👋</h2>
+      <p class="subtitle">Please login to continue</p>
+
+      <p-message
+        *ngIf="error"
+        severity="error"
+        text="{{ error }}"
+        styleClass="mb-3"
+      ></p-message>
+
+      <form (ngSubmit)="login()" #loginForm="ngForm" class="p-fluid">
+        <div class="field">
+          <label for="email">Email</label>
+          <span class="p-input-icon-left w-full">
+            <i class="pi pi-envelope"></i>
+            <input
+              id="email"
+              type="email"
+              pInputText
+              [(ngModel)]="email"
+              name="email"
+              required
+              placeholder="Enter your email"
+            />
+          </span>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <span class="p-input-icon-left w-full">
+            <i class="pi pi-lock"></i>
+            <p-password
+              id="password"
+              [(ngModel)]="password"
+              name="password"
+              [feedback]="false"
+              placeholder="Enter your password"
+              toggleMask="true"
+            ></p-password>
+          </span>
+        </div>
+
+        <button
+          pButton
+          type="submit"
+          label="Login"
+          class="rounded w-full"
+          size="small"
+          [loading]="loading"
+          [disabled]="loginForm.invalid"
+        > </button>
+      </form>
+    </div>
+  </p-card>
+</div>

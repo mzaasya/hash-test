@@ -1,0 +1,19 @@
+name: armas-erp
+services:
+  armas-erp:
+    image: ghcr.io/armasid/als
+    container_name: armas-erp
+    restart: on-failure
+    ports:
+      - 3024:80
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.armas-erp.rule=Host(`erp.armas.id`) || Host(`dss.armas.id`)
+      # - traefik.http.routers.armas-erp.entrypoints=websecure
+      # - traefik.http.routers.armas-erp.tls=true
+      # - traefik.http.routers.armas-erp.tls.certresolver=leresolver
+      - traefik.http.services.armas-erp.loadbalancer.server.port=80
+networks:
+  default:
+    name: jiwalu
+    external: true
