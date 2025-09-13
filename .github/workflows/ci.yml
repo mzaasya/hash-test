@@ -32,13 +32,13 @@ jobs:
           file: Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository }}
-  # deploy:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Redeploy 1
-  #       uses: fjogeleit/http-request-action@v1.16.1
-  #       with:
-  #         url: ""
-  #         method: "POST"
-  #         timeout: 600000
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Redeploy 1
+        uses: fjogeleit/http-request-action@v1.16.1
+        with:
+          url: "https://server2.jiwalu.id/api/stacks/webhooks/f330bee8-2dcf-469b-b727-0ae2ae7f892a"
+          method: "POST"
+          timeout: 600000
