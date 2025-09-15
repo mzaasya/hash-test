@@ -41,7 +41,6 @@ export class LoginComponent {
       this.loading = false;
       return;
     }
-    console.log(res);
     await this.router.navigate(['/']);
   }
 }

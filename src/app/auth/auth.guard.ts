@@ -9,8 +9,6 @@ export const authGuard: CanActivateFn = async () => {
 
   const user: User | null = await firstValueFrom(authState(auth));
 
-  console.log(user);
-
   if (user) {
     return true;
   } else {

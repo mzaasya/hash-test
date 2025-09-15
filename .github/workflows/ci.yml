@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - "master"
+      - 'master'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -39,6 +39,6 @@ jobs:
       - name: Redeploy 1
         uses: fjogeleit/http-request-action@v1.16.1
         with:
-          url: "https://server2.jiwalu.id/api/stacks/webhooks/f330bee8-2dcf-469b-b727-0ae2ae7f892a"
-          method: "POST"
+          url: 'https://server2.jiwalu.id/api/stacks/webhooks/f330bee8-2dcf-469b-b727-0ae2ae7f892a'
+          method: 'POST'
           timeout: 600000

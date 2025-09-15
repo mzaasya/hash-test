@@ -1,126 +1,141 @@
 <p-menubar>
-    <ng-template pTemplate="start">
-        <p class="text-lg">Hashmicro Technical Test</p>
-    </ng-template>
-    <ng-template pTemplate="end">
-        <div class="flex align-items-center gap-2">
-            <p-button 
-             icon="pi pi-sign-out" 
-             label="Logout" 
-             size="small" 
-             [rounded]="true" 
-             [loading]="loading" 
-             (onClick)="logout()">
-            </p-button>
-        </div>
-    </ng-template>
+  <ng-template pTemplate="start">
+    <p class="text-lg">Hashmicro Technical Test</p>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div class="flex align-items-center gap-2">
+      <p-button
+        icon="pi pi-sign-out"
+        label="Logout"
+        size="small"
+        [rounded]="true"
+        [loading]="loadingLogout"
+        (onClick)="logout()"
+      >
+      </p-button>
+    </div>
+  </ng-template>
 </p-menubar>
 
 <div class="custom-container">
-    <p-card class="custom-card my-5">
-        <div class="custom-content">
-            <h2 class="title">Matching Letter</h2>
-            <p class="subtitle">Please input the word to compare it</p>
+  <p-card class="custom-card my-5">
+    <div class="custom-content">
+      <h2 class="title">Matching Letter</h2>
+      <p class="subtitle">Please input the word to compare it</p>
 
-            <form (ngSubmit)="matchPercentage()" #matchingForm="ngForm" class="p-fluid">
-                <div class="field">
-                    <label for="input1">First word</label>
-                    <span class="p-input-icon-left w-full">
-                        <i class="pi pi-angle-right"></i>
-                        <input
-                        id="input1"
-                        type="text"
-                        pInputText
-                        [(ngModel)]="input1"
-                        name="input1"
-                        required
-                        placeholder="Enter the first word"
-                        />
-                    </span>
-                </div>
-
-                <div class="field">
-                    <label for="input2">Second word</label>
-                    <span class="p-input-icon-left w-full">
-                        <i class="pi pi-angle-right"></i>
-                        <input
-                        id="input2"
-                        type="text"
-                        pInputText
-                        [(ngModel)]="input2"
-                        name="input2"
-                        required
-                        placeholder="Enter the second word"
-                        />
-                    </span>
-                </div>
-
-                <div class="field">
-                    <div class="flex flex-wrap gap-3">
-                        <div class="flex align-items-center">
-                            <p-radioButton 
-                                name="cs"
-                                value="cs"
-                                required
-                                [(ngModel)]="inputType"
-                                inputId="type1" />
-                            <label for="type1" class="ml-2">
-                                Case sensitive
-                            </label>
-                        </div>
-                        <div class="flex align-items-center">
-                            <p-radioButton 
-                                name="ci" 
-                                value="ci"
-                                required
-                                [(ngModel)]="inputType" 
-                                inputId="type2" />
-                            <label for="type2" class="ml-2">
-                                Case insensitive
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex gap-2">
-                    <div class="flex flex-1">
-                        <button
-                        pButton
-                        type="button"
-                        label="Reset"
-                        class="rounded w-full"
-                        size="small"
-                        severity="danger"
-                        [disabled]="hideResult"
-                        (click)="reset()"
-                        > </button>
-                    </div>
-                    <div class="flex flex-1">
-                        <button
-                        pButton
-                        type="submit"
-                        label="Compare"
-                        class="rounded w-full"
-                        size="small"
-                        [disabled]="matchingForm.invalid"
-                        > </button>
-                    </div>
-                </div>
-            </form>
-
-            <div [hidden]="hideResult">
-                <br>
-                <hr>
-                <h2 class="text-center">Result</h2>
-                <p-table [value]="result" [tableStyle]="{ 'min-width': '20rem' }">
-                    <ng-template pTemplate="body" let-res>
-                        <tr>
-                            <td>{{ res.title }}</td>
-                            <td>{{ res.value }}</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
+      <form
+        (ngSubmit)="matchPercentage()"
+        #matchingForm="ngForm"
+        class="p-fluid"
+      >
+        <div class="field">
+          <label for="input1">First word</label>
+          <span class="p-input-icon-left w-full">
+            <i class="pi pi-angle-right"></i>
+            <input
+              id="input1"
+              type="text"
+              pInputText
+              [(ngModel)]="input1"
+              name="input1"
+              required
+              placeholder="Enter the first word"
+            />
+          </span>
         </div>
-    </p-card>
+
+        <div class="field">
+          <label for="input2">Second word</label>
+          <span class="p-input-icon-left w-full">
+            <i class="pi pi-angle-right"></i>
+            <input
+              id="input2"
+              type="text"
+              pInputText
+              [(ngModel)]="input2"
+              name="input2"
+              required
+              placeholder="Enter the second word"
+            />
+          </span>
+        </div>
+
+        <div class="field">
+          <div class="flex flex-wrap gap-3">
+            <div class="flex align-items-center">
+              <p-radioButton
+                name="cs"
+                value="cs"
+                required
+                [(ngModel)]="inputType"
+                inputId="type1"
+              />
+              <label for="type1" class="ml-2"> Case sensitive </label>
+            </div>
+            <div class="flex align-items-center">
+              <p-radioButton
+                name="ci"
+                value="ci"
+                required
+                [(ngModel)]="inputType"
+                inputId="type2"
+              />
+              <label for="type2" class="ml-2"> Case insensitive </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-2">
+          <div class="flex flex-1">
+            <button
+              pButton
+              type="button"
+              label="Reset"
+              class="rounded w-full"
+              size="small"
+              severity="danger"
+              [disabled]="hideResult"
+              (click)="reset()"
+            ><span></span></button>
+          </div>
+          <div class="flex flex-1">
+            <button
+              pButton
+              type="submit"
+              label="Compare"
+              class="rounded w-full"
+              size="small"
+              [loading]="loading"
+              [disabled]="matchingForm.invalid"
+            ><span></span></button>
+          </div>
+        </div>
+      </form>
+
+      <div [hidden]="hideResult">
+        <br>
+        <hr>
+        <h2 class="text-center">Result</h2>
+        <p-table [value]="result" [tableStyle]="{ 'min-width': '20rem' }">
+          <ng-template pTemplate="body" let-res>
+            <tr>
+              <td>{{ res.title }}</td>
+              <td>{{ res.value }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <br>
+        <hr>
+        <h2 class="text-center">AI Opinion</h2>
+        <p-accordion>
+          <p-accordionTab [header]="header1">
+            {{ opinion1 }}
+          </p-accordionTab>
+          <p-accordionTab [header]="header2">
+            {{ opinion2 }}
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+    </div>
+  </p-card>
 </div>

@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { AccordionModule } from 'primeng/accordion';
+import { AiService } from 'app/helper/ai/ai.service';
 import _ from 'lodash';
 
 @Component({
@@ -24,6 +26,7 @@ import _ from 'lodash';
     InputTextModule,
     TableModule,
     RadioButtonModule,
+    AccordionModule,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css',
@@ -31,15 +34,28 @@ import _ from 'lodash';
 export class MainComponent {
   private router = inject(Router);
   private authService = inject(AuthService);
+  private aiService = inject(AiService);
 
   loading = false;
+  loadingLogout = false;
   input1 = '';
   input2 = '';
+  header1 = '';
+  header2 = '';
+  opinion1 = '';
+  opinion2 = '';
   inputType = '';
   result: any[] = [];
   hideResult = true;
 
-  matchPercentage() {
+  async matchPercentage() {
+    this.loading = true;
+
+    this.header1 = this.input1;
+    this.header2 = this.input2;
+    this.opinion1 = await this.aiService.textPrompt(this.input1);
+    this.opinion2 = await this.aiService.textPrompt(this.input2);
+
     let str1 = _.replace(this.input1, /\s+/g, '');
     let str2 = _.replace(this.input2, /\s+/g, '');
 
@@ -81,19 +97,24 @@ export class MainComponent {
       },
     ];
 
+    this.loading = false;
     this.hideResult = false;
   }
 
   reset() {
     this.input1 = '';
     this.input2 = '';
+    this.header1 = '';
+    this.header2 = '';
+    this.opinion1 = '';
+    this.opinion2 = '';
     this.inputType = '';
     this.result = [];
     this.hideResult = true;
   }
 
   async logout() {
-    this.loading = true;
+    this.loadingLogout = true;
     await this.authService.logout();
     await this.router.navigate(['/login']);
   }
