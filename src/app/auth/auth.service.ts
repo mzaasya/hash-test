@@ -27,6 +27,10 @@ export class AuthService {
     }
   }
 
+  async getToken() {
+    return await this.auth.currentUser?.getIdToken();
+  }
+
   logout() {
     return signOut(this.auth);
   }

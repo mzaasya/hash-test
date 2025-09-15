@@ -1,23 +1,32 @@
-import { Injectable } from '@angular/core';
-import { InferenceClient } from '@huggingface/inference';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
+import { firstValueFrom } from 'rxjs';
+import { AuthService } from 'app/auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AiService {
-  private hf = new InferenceClient(environment.hfKey);
+  private http = inject(HttpClient);
+  private authService = inject(AuthService);
 
   async textPrompt(text: string) {
-    const content = `What do you think about this word ${text}`;
-    return await this.hf
-      .chatCompletion({
-        model: 'meta-llama/Llama-3.1-8B-Instruct',
-        messages: [{ role: 'user', content: content }],
-        max_tokens: 512,
-      })
-      .then((res) => {
-        return res.choices[0].message.content;
+    const token = await this.authService.getToken();
+    return await firstValueFrom(
+      this.http.post(
+        `${environment.apiUrl}text`,
+        { text },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      ),
+    )
+      .then((res: any) => {
+        return res.result;
       })
       .catch((err) => {
         return err.message;
