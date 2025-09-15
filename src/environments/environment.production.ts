@@ -8,5 +8,5 @@ export const environment = {
     messagingSenderId: '350680241077',
     appId: '1:350680241077:web:012295718db6cb5669bffc',
   },
-  hfKey: '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',
+  hfKey: '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',
 };
